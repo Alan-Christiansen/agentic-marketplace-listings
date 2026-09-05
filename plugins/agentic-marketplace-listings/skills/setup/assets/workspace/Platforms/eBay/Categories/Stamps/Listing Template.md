@@ -11,7 +11,7 @@ sold_date:
 ## Intake Information
 ### Seller-provided Notes
 ### Stamp Facts
-### Photo Observations
+### Photo-Derived Observations
 ## eBay Stamp Fields
 ### Title
 ### Price

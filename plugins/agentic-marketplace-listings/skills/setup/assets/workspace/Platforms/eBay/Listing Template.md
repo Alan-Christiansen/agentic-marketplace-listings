@@ -12,7 +12,7 @@ sold_date:
 ### Seller-provided Notes
 ### Item Facts and Features
 ### Dimensions
-### Photo Observations
+### Photo-Derived Observations
 ## eBay Fields
 ### Title
 ### Price

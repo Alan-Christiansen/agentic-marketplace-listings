@@ -12,7 +12,7 @@ sold_date:
 ### Seller-provided Notes
 ### Features
 ### Dimensions
-### Photo Observations
+### Photo-Derived Observations
 ## Facebook Marketplace Fields
 ### Title
 ### Price
