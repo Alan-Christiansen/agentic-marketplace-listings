@@ -63,6 +63,19 @@ def validate_skills() -> None:
             fail(f"Invalid skill frontmatter for {name}")
         read(PLUGIN / "skills" / name / "agents" / "openai.yaml")
 
+    new_listing = read(PLUGIN / "skills" / "new-listing" / "SKILL.md")
+    fast_path_requirements = {
+        "self-contained Stage 1": "Treat routine Stage 1 intake in an initialized workspace as self-contained.",
+        "single preflight call": "Use one read-only preflight tool call",
+        "no split preflight": "Do not split these checks into separate calls.",
+        "first-day cover routing": "including first-day covers",
+        "successful creation verification": "A successful creation tool result is sufficient verification",
+        "no post-preflight narration": "Do not add another planning or status message between a clean preflight and creation.",
+    }
+    for requirement, token in fast_path_requirements.items():
+        if token not in new_listing:
+            fail(f"New-listing skill is missing the {requirement} fast-path contract")
+
 
 def validate_workspace() -> None:
     required = [

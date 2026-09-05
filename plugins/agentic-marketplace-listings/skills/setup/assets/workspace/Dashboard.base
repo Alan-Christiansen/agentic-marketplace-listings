@@ -1,11 +1,11 @@
 filters:
   and:
-    - 'file.basename == "Listing"'
-    - 'file.inFolder(this.file.folder + "/Listings")'
+    - file.basename == "Listing"
+    - file.inFolder(this.file.folder + "/Listings")
 formulas:
-  item: 'file.asLink(file.folder.split("/").reverse()[0])'
-  status: 'file.folder.split("/").reverse()[1].replace(/^\d+ - /, "")'
-  time_to_sell: 'if(posted_date && sold_date, sold_date - posted_date, "")'
+  item: file.asLink(file.folder.split("/").reverse()[0])
+  status: file.folder.split("/").reverse()[1].replace(/^\d+ - /, "")
+  time_to_sell: if(posted_date && sold_date, sold_date - posted_date, "")
 properties:
   formula.item:
     displayName: Item
@@ -28,8 +28,8 @@ views:
     name: Active
     filters:
       and:
-        - 'formula.status != "Sold"'
-        - 'formula.status != "Closed"'
+        - formula.status != "Sold"
+        - formula.status != "Closed"
     groupBy:
       property: formula.status
       direction: ASC
@@ -38,24 +38,41 @@ views:
       - platform
       - posted_price
       - posted_date
+    sort:
+      - property: formula.item
+        direction: ASC
+    columnSize:
+      formula.item: 320
+      note.platform: 165
+      note.posted_price: 150
   - type: table
     name: Sold
     filters:
       and:
-        - 'formula.status == "Sold"'
+        - formula.status == "Sold"
     order:
       - formula.item
       - platform
       - sold_price
       - sold_date
       - formula.time_to_sell
+    columnSize:
+      formula.item: 320
+      note.platform: 165
+      note.sold_price: 150
+      note.sold_date: 150
   - type: table
     name: Closed
     filters:
       and:
-        - 'formula.status == "Closed"'
+        - formula.status == "Closed"
     order:
       - formula.item
       - platform
       - posted_price
       - posted_date
+    columnSize:
+      formula.item: 320
+      note.platform: 165
+      note.sold_price: 150
+      note.sold_date: 150

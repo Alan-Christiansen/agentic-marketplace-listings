@@ -3,8 +3,10 @@ Agentic Marketplace Listings is an Obsidian-first system for preparing and track
 ## Current scope
 The Codex plugin provides three skills:
 - `AML: setup` creates or safely updates an Obsidian selling workspace.
-- `AML: new-listing` starts and prepares one listing from rough notes and photos.
+- `AML: new-listing` creates a listing folder and intake record, pauses for photo export, then prepares the listing after the seller confirms the photos are ready.
 - `AML: update-listing` moves an existing listing through its lifecycle and records posted or sold details.
+
+The new-listing workflow pauses for photos by default. When a listing will have no photos, the seller can say so and continue directly to preparation.
 
 Each listing belongs to one platform, begins from the matching platform or category template, and moves through human-visible lifecycle folders: Building, Ready, Posted, Sold, and Closed. V1 tracks posted price and sold price; it does not include cross-posting, fees, shipping costs, net proceeds, buyer messaging, or autonomous posting.
 ## Repository layout
