@@ -1,0 +1,61 @@
+filters:
+  and:
+    - 'file.basename == "Listing"'
+    - 'file.inFolder(this.file.folder + "/Listings")'
+formulas:
+  item: 'file.asLink(file.folder.split("/").reverse()[0])'
+  status: 'file.folder.split("/").reverse()[1].replace(/^\d+ - /, "")'
+  time_to_sell: 'if(posted_date && sold_date, sold_date - posted_date, "")'
+properties:
+  formula.item:
+    displayName: Item
+  platform:
+    displayName: Platform
+  formula.status:
+    displayName: Status
+  posted_price:
+    displayName: Posted price
+  posted_date:
+    displayName: Posted date
+  sold_price:
+    displayName: Sold price
+  sold_date:
+    displayName: Sold date
+  formula.time_to_sell:
+    displayName: Time to sell
+views:
+  - type: table
+    name: Active
+    filters:
+      and:
+        - 'formula.status != "Sold"'
+        - 'formula.status != "Closed"'
+    groupBy:
+      property: formula.status
+      direction: ASC
+    order:
+      - formula.item
+      - platform
+      - posted_price
+      - posted_date
+  - type: table
+    name: Sold
+    filters:
+      and:
+        - 'formula.status == "Sold"'
+    order:
+      - formula.item
+      - platform
+      - sold_price
+      - sold_date
+      - formula.time_to_sell
+  - type: table
+    name: Closed
+    filters:
+      and:
+        - 'formula.status == "Closed"'
+    order:
+      - formula.item
+      - platform
+      - posted_price
+      - posted_date

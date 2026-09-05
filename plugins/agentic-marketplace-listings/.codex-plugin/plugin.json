@@ -1,0 +1,27 @@
+{
+  "name": "agentic-marketplace-listings",
+  "version": "0.1.0+codex.20260905125530",
+  "description": "Obsidian-first workflows for preparing and tracking marketplace listings.",
+  "author": {
+    "name": "Spectra Studio"
+  },
+  "homepage": "https://github.com/Alan-Christiansen/agentic-marketplace-listings",
+  "repository": "https://github.com/Alan-Christiansen/agentic-marketplace-listings",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agentic Marketplace Listings",
+    "shortDescription": "Prepare and track listings in Obsidian.",
+    "longDescription": "Create an Obsidian selling workspace with a live Base dashboard and turn rough notes and photos into organized Facebook Marketplace or eBay listing records.",
+    "developerName": "Spectra Studio",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Set up my Obsidian marketplace workspace.",
+      "Start a new marketplace listing.",
+      "Update an existing marketplace listing."
+    ]
+  }
+}

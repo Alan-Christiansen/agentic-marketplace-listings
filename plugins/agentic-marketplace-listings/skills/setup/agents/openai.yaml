@@ -1,0 +1,4 @@
+interface:
+  display_name: "AML: setup"
+  short_description: "Create an Obsidian selling workspace safely."
+  default_prompt: "Use $agentic-marketplace-listings:setup to create or update an Obsidian selling workspace."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "AML: update-listing"
+  short_description: "Update one listing's lifecycle and sale details."
+  default_prompt: "Use $agentic-marketplace-listings:update-listing to update an existing marketplace listing."

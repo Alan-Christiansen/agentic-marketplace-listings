@@ -1,0 +1,20 @@
+{
+  "name": "agentic-marketplace-listings",
+  "interface": {
+    "displayName": "Agentic Marketplace Listings"
+  },
+  "plugins": [
+    {
+      "name": "agentic-marketplace-listings",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agentic-marketplace-listings"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
