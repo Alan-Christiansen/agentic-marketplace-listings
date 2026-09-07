@@ -1,9 +1,9 @@
 # Agentic Marketplace Listings Plugin
 Codex skills for creating and managing Facebook Marketplace and eBay listing records in an Obsidian workspace with a live Base dashboard.
 ## Included skills
-- `$agentic-marketplace-listings:setup` (`AML: setup`) creates or safely updates the Obsidian workspace.
-- `$agentic-marketplace-listings:new-listing` (`AML: new-listing`) creates the listing folder and intake record, pauses for photo export, then prepares the listing after the seller confirms the photos are ready.
-- `$agentic-marketplace-listings:update-listing` (`AML: update-listing`) updates lifecycle state and posted or sold details for one existing listing.
+- `$agentic-marketplace-listings:setup` (`Marketplace: setup`) creates or safely updates the Obsidian workspace.
+- `$agentic-marketplace-listings:new-listing` (`Marketplace: new-listing`) creates the listing folder and intake record, pauses for photo export, then prepares the listing after the seller confirms the photos are ready.
+- `$agentic-marketplace-listings:update-listing` (`Marketplace: update-listing`) updates lifecycle state and posted or sold details for one existing listing.
 
 The photo pause is the default for every new listing. A seller who will not use photos can say so to proceed directly to preparation.
 

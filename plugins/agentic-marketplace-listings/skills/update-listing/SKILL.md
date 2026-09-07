@@ -2,7 +2,7 @@
 name: update-listing
 description: Update one existing Agentic Marketplace Listings record through Ready, Posted, price-change, Sold, or Closed lifecycle actions. Use when the seller wants to change the state or tracked posted or sold details of a known listing. Do not use for external posting, buyer communication, bookkeeping, or an ambiguous listing.
 ---
-# AML: Update Listing
+# Marketplace: Update Listing
 Complete one unambiguous lifecycle update in the same turn whenever the seller has supplied everything the action requires.
 ## Fast preflight
 Find the intended workspace by the presence of `How to Use.md`, `Dashboard.base`, platform resources, and the five lifecycle folders. Read the plugin's [operating policy](../../references/operating-policy.md).

@@ -2,7 +2,7 @@
 name: new-listing
 description: Start one Facebook Marketplace or eBay listing in an initialized Agentic Marketplace Listings workspace, creating its Building folder and Listing.md before pausing for photos by default, then prepare it after the seller confirms the photos are ready or explicitly says there are none. Do not use for cross-posting, external posting, or updating an ambiguous existing listing.
 ---
-# AML: New Listing
+# Marketplace: New Listing
 Start with a stable place for working photos, then turn the seller's available evidence into one organized listing while asking as little as accuracy permits.
 ## Stage 1: Create the intake record and pause
 Find the intended workspace by the presence of `How to Use.md`, `Dashboard.base`, the platform templates, and the five lifecycle folders. If it is not initialized, recommend `$agentic-marketplace-listings:setup` and stop.
