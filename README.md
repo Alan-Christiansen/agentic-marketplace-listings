@@ -12,7 +12,7 @@ Before preparing your first listing, review the `Guidance.md` and `Seller Profil
 
 Pay special attention to `Voice and tone` in each seller profile. Make sure it sounds like you, then review every finished draft before posting to confirm that the wording fits your voice and accurately represents the item.
 
-Seller profiles are yours and are never overwritten by setup updates. Guidance files are engine-owned, so review any proposed replacement before approving a future workspace update.
+Seller profiles are always preserved during setup updates. If you customize a `Guidance.md` file, review future update proposals carefully so you do not unintentionally replace your changes.
 ### Start a listing
 1. Ask the agent to start a Facebook Marketplace or eBay listing and provide whatever you already know.
 2. The agent creates a named folder with `Listing.md`, gives you its exact location, and pauses.
