@@ -12,6 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins" / "agentic-marketplace-listings"
 WORKSPACE = PLUGIN / "skills" / "setup" / "assets" / "workspace"
+CODEX_MANIFEST = PLUGIN / ".codex-plugin" / "plugin.json"
+CLAUDE_MANIFEST = PLUGIN / ".claude-plugin" / "plugin.json"
 
 
 def fail(message: str) -> None:
@@ -31,14 +33,20 @@ def load_json(path: Path) -> dict:
         fail(f"Invalid JSON in {path.relative_to(ROOT)}: {exc}")
 
 
-def validate_manifest() -> None:
-    manifest = load_json(PLUGIN / ".codex-plugin" / "plugin.json")
-    if manifest.get("name") != "agentic-marketplace-listings":
-        fail("Plugin manifest name does not match the plugin folder")
-    if manifest.get("skills") != "./skills/":
-        fail("Plugin manifest must point skills to ./skills/")
-    if manifest.get("license") != "MIT":
-        fail("Plugin manifest must declare the MIT license")
+def validate_manifests() -> None:
+    codex_manifest = load_json(CODEX_MANIFEST)
+    claude_manifest = load_json(CLAUDE_MANIFEST)
+    for host, manifest in (("Codex", codex_manifest), ("Claude", claude_manifest)):
+        if manifest.get("name") != "agentic-marketplace-listings":
+            fail(f"{host} plugin manifest name does not match the plugin folder")
+        if manifest.get("license") != "MIT":
+            fail(f"{host} plugin manifest must declare the MIT license")
+    if codex_manifest.get("skills") != "./skills/":
+        fail("Codex plugin manifest must point skills to ./skills/")
+
+    codex_version = codex_manifest.get("version", "").split("+", 1)[0]
+    if codex_version != claude_manifest.get("version"):
+        fail("Codex and Claude plugin release versions must match")
 
 
 def validate_marketplace() -> None:
@@ -50,6 +58,17 @@ def validate_marketplace() -> None:
         fail("Marketplace must contain exactly the AML plugin entry")
     if entries[0].get("source", {}).get("path") != "./plugins/agentic-marketplace-listings":
         fail("Marketplace plugin path is incorrect")
+
+    claude_marketplace = load_json(ROOT / ".claude-plugin" / "marketplace.json")
+    if claude_marketplace.get("name") != "agentic-marketplace-listings":
+        fail("Claude marketplace name must be agentic-marketplace-listings")
+    if not claude_marketplace.get("owner", {}).get("name"):
+        fail("Claude marketplace must identify its owner")
+    claude_entries = claude_marketplace.get("plugins", [])
+    if len(claude_entries) != 1 or claude_entries[0].get("name") != "agentic-marketplace-listings":
+        fail("Claude marketplace must contain exactly the plugin entry")
+    if claude_entries[0].get("source") != "./plugins/agentic-marketplace-listings":
+        fail("Claude marketplace plugin path is incorrect")
 
 
 def validate_skills() -> None:
@@ -71,6 +90,7 @@ def validate_skills() -> None:
         "first-day cover routing": "including first-day covers",
         "successful creation verification": "A successful creation tool result is sufficient verification",
         "no post-preflight narration": "Do not add another planning or status message between a clean preflight and creation.",
+        "compact heading spacing": "do not insert a blank line immediately before or after any heading.",
     }
     for requirement, token in fast_path_requirements.items():
         if token not in new_listing:
@@ -144,10 +164,23 @@ def validate_public_safety() -> None:
             if value in text:
                 fail(f"Unfinished placeholder {value!r} in {path.relative_to(ROOT)}")
 
+    bundled_workspace_parts = []
+    for path in WORKSPACE.rglob("*"):
+        if not path.is_file():
+            continue
+        try:
+            bundled_workspace_parts.append(path.read_text(encoding="utf-8"))
+        except UnicodeDecodeError:
+            continue
+    bundled_workspace_text = "\n".join(bundled_workspace_parts)
+    for personal_name in ("Alan", "Lydia"):
+        if personal_name in bundled_workspace_text:
+            fail(f"Personal name {personal_name!r} in bundled workspace defaults")
+
 
 def main() -> int:
     checks = [
-        validate_manifest,
+        validate_manifests,
         validate_marketplace,
         validate_skills,
         validate_workspace,

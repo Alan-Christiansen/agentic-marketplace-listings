@@ -1,0 +1,16 @@
+{
+  "name": "agentic-marketplace-listings",
+  "owner": {
+    "name": "Spectra Studio",
+    "url": "https://github.com/Alan-Christiansen"
+  },
+  "description": "Obsidian-first workflows for preparing and tracking marketplace listings.",
+  "plugins": [
+    {
+      "name": "agentic-marketplace-listings",
+      "source": "./plugins/agentic-marketplace-listings",
+      "description": "Prepare and track Facebook Marketplace and eBay listings in Obsidian.",
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Create or safely update a self-contained Agentic Marketplace Listings workspace in a user-selected Obsidian vault folder. Use when the user asks to set up, initialize, install, or refresh the selling workspace. Do not use to create an individual listing or install the Codex plugin itself.
+description: Create or safely update a self-contained Agentic Marketplace Listings workspace in a user-selected Obsidian vault folder. Use when the user asks to set up, initialize, install, or refresh the selling workspace. Do not use to create an individual listing or install the host plugin itself.
 ---
 # Marketplace: Setup
 Create an Obsidian workspace with ordinary Markdown listing records and a live Base dashboard. It has no dependency on private vault infrastructure.

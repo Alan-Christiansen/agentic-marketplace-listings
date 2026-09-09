@@ -5,7 +5,7 @@ description: Start one Facebook Marketplace or eBay listing in an initialized Ag
 # Marketplace: New Listing
 Start with a stable place for working photos, then turn the seller's available evidence into one organized listing while asking as little as accuracy permits.
 ## Stage 1: Create the intake record and pause
-Find the intended workspace by the presence of `How to Use.md`, `Dashboard.base`, the platform templates, and the five lifecycle folders. If it is not initialized, recommend `$agentic-marketplace-listings:setup` and stop.
+Find the intended workspace by the presence of `How to Use.md`, `Dashboard.base`, the platform templates, and the five lifecycle folders. If it is not initialized, recommend the plugin's `setup` skill and stop.
 
 Resolve a concise human-readable item name and exactly one platform: Facebook Marketplace or eBay. If the seller has not selected a platform, ask before creating the source record. For eBay, determine whether an applicable category-specific template exists. Ask when the available information does not safely distinguish the general eBay template from a specialized template.
 
@@ -22,7 +22,7 @@ Use one read-only preflight tool call to read the plugin's [operating policy](..
 
 If a same-named item folder or likely duplicate exists anywhere in the lifecycle folders, show the candidates and ask whether to use the existing listing or choose another name. Do not create a suffixed duplicate silently.
 
-The seller's request to start a listing authorizes creation of `Listings/1 - Building/<Item name>/Listing.md`; do not pause for a separate approval after a clean preflight. Create it from the selected template, set the item name and local creation date as an unquoted `YYYY-MM-DD` property value, and place supplied notes, features, dimensions, and item facts in the matching intake sections without discarding uncertainty or changing their meaning.
+The seller's request to start a listing authorizes creation of `Listings/1 - Building/<Item name>/Listing.md`; do not pause for a separate approval after a clean preflight. Create it from the selected template, set the item name and local creation date as an unquoted `YYYY-MM-DD` property value, and place supplied notes, features, dimensions, and item facts in the matching intake sections without discarding uncertainty or changing their meaning. Preserve the template's compact ATX-heading spacing exactly: do not insert a blank line immediately before or after any heading.
 
 Working photos belong beside `Listing.md`. Do not create an originals folder, relocate an external original library, or silently alter image files.
 
@@ -40,7 +40,7 @@ Use approved examples inside the seller profile only for voice and structure. Ne
 
 Identify the item and research only when useful or requested. Separate seller facts, visible evidence, research, and inference. For stamps, preserve seller-entered specialist data and never invent catalog number, issue, variety, grade, gum condition, cancellation, faults, or authenticity. Keep unsupported stamp fields blank or explicitly unknown, and do not conflate Place of Origin with Country of Origin.
 
-Draft each platform-ready field under the headings supplied by the selected template. Preserve blanks or explicit unknowns when information is incomplete but a useful draft is still possible. Ask a compact grouped question only for remaining blockers.
+Draft each platform-ready field under the headings supplied by the selected template. Preserve blanks or explicit unknowns when information is incomplete but a useful draft is still possible. When editing the record, keep the template's compact ATX-heading spacing: no blank line immediately before or after a heading. Ask a compact grouped question only for remaining blockers.
 ## Finish preparation
 The live `Dashboard.base` needs no regeneration. Keep the item in Building until the seller confirms the content is ready; then move its whole folder to Ready. Do not claim the listing was posted or move it to Posted without a separate explicit instruction containing the actual posted price or confirming the prepared price.
 
