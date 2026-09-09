@@ -1,5 +1,5 @@
 ---
-name: update-listing
+name: marketplace-update-listing
 description: Update one existing Agentic Marketplace Listings record through Ready, Posted, price-change, Sold, or Closed lifecycle actions. Use when the seller wants to change the state or tracked posted or sold details of a known listing. Do not use for external posting, buyer communication, bookkeeping, or an ambiguous listing.
 ---
 # Marketplace: Update Listing

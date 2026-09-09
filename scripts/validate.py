@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins" / "agentic-marketplace-listings"
-WORKSPACE = PLUGIN / "skills" / "setup" / "assets" / "workspace"
+WORKSPACE = PLUGIN / "skills" / "marketplace-setup" / "assets" / "workspace"
 CODEX_MANIFEST = PLUGIN / ".codex-plugin" / "plugin.json"
 CLAUDE_MANIFEST = PLUGIN / ".claude-plugin" / "plugin.json"
 
@@ -72,7 +72,7 @@ def validate_marketplace() -> None:
 
 
 def validate_skills() -> None:
-    expected = {"setup", "new-listing", "update-listing"}
+    expected = {"marketplace-setup", "marketplace-new-listing", "marketplace-update-listing"}
     skill_dirs = {path.parent.name for path in (PLUGIN / "skills").glob("*/SKILL.md")}
     if skill_dirs != expected:
         fail(f"Unexpected skill set: {sorted(skill_dirs)}")
@@ -80,9 +80,13 @@ def validate_skills() -> None:
         text = read(PLUGIN / "skills" / name / "SKILL.md")
         if not text.startswith("---\n") or f"name: {name}\n" not in text:
             fail(f"Invalid skill frontmatter for {name}")
-        read(PLUGIN / "skills" / name / "agents" / "openai.yaml")
+        adapter = read(PLUGIN / "skills" / name / "agents" / "openai.yaml")
+        if "display_name:" not in adapter:
+            fail(f"Codex adapter for {name} must declare a display_name")
+        if f"$agentic-marketplace-listings:{name}" not in adapter:
+            fail(f"Codex adapter for {name} references a stale skill id")
 
-    new_listing = read(PLUGIN / "skills" / "new-listing" / "SKILL.md")
+    new_listing = read(PLUGIN / "skills" / "marketplace-new-listing" / "SKILL.md")
     fast_path_requirements = {
         "self-contained Stage 1": "Treat routine Stage 1 intake in an initialized workspace as self-contained.",
         "single preflight call": "Use one read-only preflight tool call",

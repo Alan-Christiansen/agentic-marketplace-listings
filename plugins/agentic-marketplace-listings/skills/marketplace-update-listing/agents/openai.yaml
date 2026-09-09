@@ -1,0 +1,4 @@
+interface:
+  display_name: "Marketplace: Update Listing"
+  short_description: "Update one listing's lifecycle and sale details."
+  default_prompt: "Use $agentic-marketplace-listings:marketplace-update-listing to update an existing marketplace listing."

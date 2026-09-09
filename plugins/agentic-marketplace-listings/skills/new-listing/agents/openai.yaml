@@ -1,4 +1,0 @@
-interface:
-  display_name: "Marketplace: new-listing"
-  short_description: "Start and prepare one marketplace listing."
-  default_prompt: "Use $agentic-marketplace-listings:new-listing to start and prepare a marketplace listing."

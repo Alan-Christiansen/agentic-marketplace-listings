@@ -38,14 +38,14 @@ codex plugin marketplace add Alan-Christiansen/agentic-marketplace-listings --re
 codex plugin add agentic-marketplace-listings@agentic-marketplace-listings
 ```
 
-The available skills are shown as `Marketplace: setup`, `Marketplace: new-listing`, and `Marketplace: update-listing`.
+The available skills are shown as `Marketplace: Setup`, `Marketplace: New Listing`, and `Marketplace: Update Listing`.
 ### Claude Cowork
 1. Open Cowork, then open **Customize → Plugins**.
-2. In **Personal plugins**, select **+ → Add marketplace**.
+2. In **Personal plugins**, select **Add → Add marketplace → Add from a repository**.
 3. Add `https://github.com/Alan-Christiansen/agentic-marketplace-listings` as a repository.
 4. Install **Agentic Marketplace Listings** and begin a new Cowork task.
 
-In Claude, the skills are namespaced under `agentic-marketplace-listings` and can also be selected from the skills menu.
+In Claude, the skills are namespaced under `agentic-marketplace-listings` and appear in the `/` menu as `marketplace-setup`, `marketplace-new-listing`, and `marketplace-update-listing`.
 ## Get updates
 ### ChatGPT and Codex
 Refresh the Git-backed marketplace and reinstall the plugin:
@@ -56,7 +56,7 @@ codex plugin add agentic-marketplace-listings@agentic-marketplace-listings
 ### Claude Cowork
 Refresh the marketplace from the Plugins screen, then update or reinstall the plugin when Claude shows a newer version.
 
-Run the setup skill against the existing workspace to review engine-file updates. It will show the exact proposed replacements before writing them.
+Run the `marketplace-setup` skill against the existing workspace to review engine-file updates. It will show the exact proposed replacements before writing them.
 ## Compatibility and limitations
 - Requires a file-capable ChatGPT/Codex or Claude Cowork session with access to the selected workspace folder.
 - Requires Obsidian with the Bases core plugin enabled.
