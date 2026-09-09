@@ -62,12 +62,6 @@ def validate_marketplace() -> None:
     claude_marketplace = load_json(ROOT / ".claude-plugin" / "marketplace.json")
     if claude_marketplace.get("name") != "agentic-marketplace-listings":
         fail("Claude marketplace name must be agentic-marketplace-listings")
-    claude_manifest = load_json(CLAUDE_MANIFEST)
-    if claude_marketplace.get("version") != claude_manifest.get("version"):
-        fail(
-            "Claude marketplace manifest must declare the current release version so a "
-            "marketplace refresh sees a changed manifest"
-        )
     if not claude_marketplace.get("owner", {}).get("name"):
         fail("Claude marketplace must identify its owner")
     claude_entries = claude_marketplace.get("plugins", [])
@@ -75,6 +69,12 @@ def validate_marketplace() -> None:
         fail("Claude marketplace must contain exactly the plugin entry")
     if claude_entries[0].get("source") != "./plugins/agentic-marketplace-listings":
         fail("Claude marketplace plugin path is incorrect")
+    claude_manifest = load_json(CLAUDE_MANIFEST)
+    if claude_entries[0].get("version") != claude_manifest.get("version"):
+        fail(
+            "Claude marketplace entry must repeat the plugin release version so a marketplace "
+            "refresh sees a changed manifest; `claude plugin tag` enforces the same agreement"
+        )
 
 
 def validate_skills() -> None:

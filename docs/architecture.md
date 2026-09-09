@@ -59,6 +59,11 @@ One provider-neutral skill source carries two labels because the hosts derive th
 
 Skill directories carry the `marketplace-` prefix so the Claude-side label is self-describing and the three skills group together, and each `agents/openai.yaml` carries the title-case `Marketplace: ...` display name that Codex shows. The directory name remains the single skill identity in both hosts; the Codex adapter is a label, not a second identity. Validation asserts that each adapter declares a display name and references its own skill id, so the two labels cannot drift apart silently.
 
+## Release versioning
+The marketplace entry in `.claude-plugin/marketplace.json` repeats the plugin's `plugin.json` version, so releasing the plugin changes the marketplace manifest itself. A manifest that is byte-identical across releases gives a host refresh nothing to detect, and the host keeps offering the installed version. The Codex manifest carries `+codex.<timestamp>` build metadata, which already changes every release.
+
+`plugin.json` wins at install time; the repeated entry version exists to make the change visible. `claude plugin tag` refuses to tag when the two disagree, and repository validation asserts the same agreement so drift is caught before release.
+
 ## Deliberate exclusions
 - One listing is not cross-posted across platforms.
 - The system does not preserve original photos; working copies sit beside `Listing.md`.

@@ -1,6 +1,5 @@
 {
   "name": "agentic-marketplace-listings",
-  "version": "0.3.0",
   "owner": {
     "name": "Spectra Studio",
     "url": "https://github.com/Alan-Christiansen"
@@ -9,6 +8,7 @@
   "plugins": [
     {
       "name": "agentic-marketplace-listings",
+      "version": "0.3.0",
       "source": "./plugins/agentic-marketplace-listings",
       "description": "Prepare and track Facebook Marketplace and eBay listings in Obsidian.",
       "category": "Productivity"
