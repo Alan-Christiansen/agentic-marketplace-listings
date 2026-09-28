@@ -18,6 +18,8 @@ Resolve an existing listing from an explicit path, the current `Listing.md`, or 
 - Dates are unquoted `YYYY-MM-DD` values in the seller's local date. Prices are numbers. Never treat an omitted date as today.
 - Track only the current posted price and date and the sold price and date. No fees, shipping costs, net proceeds, or price history.
 - Follow the template's heading layout: no blank line directly before or after a heading.
+## File hygiene
+Edit files in place. Never create backup, temporary, or scratch files in the workspace (for example `.bak` copies or `sed -i.bak`). Leave nothing behind that the seller would have to delete.
 ## Photos
 Working photos live beside `Listing.md`. Do not create an originals or archive folder. Do not resize, convert, or replace photos unless the seller asks.
 ## Authority
