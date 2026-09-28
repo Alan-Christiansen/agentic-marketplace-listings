@@ -13,16 +13,16 @@ Before preparing your first listing for a platform, review and customize the `Gu
 Your seller profiles are yours and are always preserved during workspace updates. Guidance files are included with the workspace; if you customize one, carefully review any future update proposal to avoid unintentionally replacing your changes.
 ## Day-to-day selling
 ### Start a listing
-Ask the agent to start a Facebook Marketplace or eBay listing and provide whatever you already know. A rough name, free-form notes, a feature list, or dimensions are enough to get started. Choose the platform before the listing record is created. For eBay, the agent uses a category-specific template when available.
+Ask the agent to start a Facebook Marketplace or eBay listing in one message: the platform, a rough name, everything you know (notes, features, dimensions, condition, flaws), and the photos attached. For eBay, the agent uses a category-specific template when one fits.
 
-The agent creates the item folder and `Listing.md`, provides you with the exact path, and pauses. Export the working photos to that folder, then tell the agent they are ready so it can identify, research, price, and draft the listing. This photo pause is the normal flow; if you will not use photos, say so and it can continue.
+The agent creates the item folder and `Listing.md`, saves your photos beside it, and prepares the listing: identification, research, pricing, and draft fields. If you did not attach photos, it creates the folder and asks for them first. If you will not use photos, say so and it continues.
 ### Track a listing
 Tell the agent when an item is ready, posted, repriced, sold, or closed. It updates the listing properties, moves the complete item folder, and the Base updates automatically.
 
-- `1 - Building` — information or drafting is still in progress.
-- `2 - Ready` — the listing is prepared and ready for you to post.
-- `3 - Posted` — the listing is live.
-- `4 - Sold` — the item sold.
-- `5 - Closed` — the listing ended without a sale, including removed, expired, or donated items.
+- `1 - Building`: information or drafting is still in progress.
+- `2 - Ready`: the listing is prepared and ready for you to post.
+- `3 - Posted`: the listing is live.
+- `4 - Sold`: the item sold.
+- `5 - Closed`: the listing ended without a sale, including removed, expired, or donated items.
 
 For a posted or sold item, provide the actual price and date. For a price change, provide the new price. The workspace records the selected platform, posted price and date, and sold price and date. It does not track fees, shipping costs, net proceeds, or cross-posting.

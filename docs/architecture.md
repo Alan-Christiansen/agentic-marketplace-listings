@@ -43,7 +43,7 @@ The setup skill must identify collisions and show the exact update set before re
 ## Information layers
 Rules live in one place each. `references/operating-policy.md` owns sources of truth, fact integrity, record formats, and authority boundaries. Platform and category `Guidance.md` files own listing craft and pricing outputs. Seller profiles own voice, preferences, and approved examples only, because setup never overwrites them and any policy placed there would freeze in every installed workspace.
 
-New-listing loads the template first and the drafting material (guidance, seller profile, category guidance, photos) only when it prepares the listing. Update-listing loads none of it.
+New-listing works from one seller message containing notes and attached photos: it creates the record, saves the photos beside `Listing.md`, and only then loads the drafting material (guidance, seller profile, category guidance). When no photos are attached it creates the record and asks for them before drafting. Update-listing loads none of this; a bundled script resolves the listing, validates the transition, writes the tracked properties, and moves the folder in one call, because the operation is mechanical and model deliberation only added latency.
 ## Listing records
 Every template shares the same YAML properties: `type`, `platform`, `created`, `posted_price`, `posted_date`, `sold_price`, `sold_date`. The lifecycle folder supplies status, the item folder supplies the display name, and the Base derives time to sell. The body separates seller intake, platform-ready fields, and research notes. Field headings come from each template, so the templates are the field specification.
 ## Shared and divergent behavior

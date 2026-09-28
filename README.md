@@ -14,12 +14,11 @@ Pay special attention to `Voice and tone` in each seller profile. Make sure it s
 
 Seller profiles are always preserved during setup updates. If you customize a `Guidance.md` file, review future update proposals carefully so you do not unintentionally replace your changes.
 ### Start a listing
-1. Ask the agent to start a Facebook Marketplace or eBay listing and provide whatever you already know.
-2. The agent creates a named folder with `Listing.md`, gives you its exact location, and pauses.
-3. Export working photos into that folder and tell the agent they are ready. If there will be no photos, say so.
-4. The agent uses your notes, photos, platform guidance, and seller profile to prepare the listing without inventing missing facts.
+1. Ask the agent to start a Facebook Marketplace or eBay listing. In the same message, include everything you know about the item and attach the photos.
+2. The agent creates a named folder with `Listing.md`, saves the photos beside it, and prepares the listing from your notes, photos, platform guidance, and seller profile without inventing missing facts.
+3. If you did not attach photos, the agent creates the folder, asks for them, and continues once they arrive. If there will be no photos, say so.
 
-For eBay, category-specific guidance is used when available, beginning with stamps and first-day covers.
+For eBay, category-specific guidance is used when available, beginning with stamps.
 ### Track the listing
 Tell the agent when an item is ready, posted, repriced, sold, or closed. It records the applicable price and date, moves the complete item folder, and leaves the Base dashboard to update automatically.
 
