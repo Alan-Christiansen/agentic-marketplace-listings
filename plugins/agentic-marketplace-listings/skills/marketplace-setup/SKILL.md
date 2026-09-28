@@ -10,7 +10,7 @@ Resolve one exact destination folder. If more than one folder is plausible, ask.
 Compare the bundled files in `assets/workspace/` with the destination and show:
 - the destination, and whether this is a new setup or an update;
 - files and folders to create;
-- engine files to replace, listing only those that differ: `How to Use.md`, `Dashboard.base`, `Platforms/**/Guidance.md`, `Platforms/**/Listing Template.md`;
+- engine files to replace, listing only those that differ: `How to Use.md`, `Dashboard.base`, `Platforms/**/Guidance.md`, `Platforms/**/Listing Template.md`, `.scripts/update_listing.py`;
 - seller files that will be preserved: `Platforms/*/Seller Profile.md` and everything under `Listings/`;
 - conflicts or unclear ownership.
 
@@ -20,7 +20,8 @@ If the destination uses an older layout, such as `Seller Profiles/` or `System/`
 ## Write
 - Copy the approved bundled files. Never overwrite a seller profile; create a missing one only if the preflight listed it.
 - Create any missing lifecycle folders under `Listings/`.
+- Copy `../marketplace-update-listing/scripts/update_listing.py` to `.scripts/update_listing.py` in the workspace. This is the single source for that script; do not keep a second copy under `assets/`. The workspace copy lets updates run in one call where the vault lives.
 - Never move, rename, or delete listing folders or photos.
 - If a write fails, stop and report exactly what succeeded and what did not. Do not claim a rollback.
 ## Verify
-Confirm the five lifecycle folders exist, the bundled files are readable, and seller files are unchanged. Report the created, replaced, and preserved paths, then stop without creating a listing.
+Confirm the five lifecycle folders exist, the bundled files and `.scripts/update_listing.py` are readable, and seller files are unchanged. Report the created, replaced, and preserved paths, then stop without creating a listing.

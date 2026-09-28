@@ -4,6 +4,8 @@ Agentic Marketplace Listings should make selling feel like working with a capabl
 ## Obsidian workspace
 ```text
 Marketplace Listings/
+├── .scripts/
+│   └── update_listing.py
 ├── How to Use.md
 ├── Dashboard.base
 ├── Platforms/
@@ -38,12 +40,13 @@ Each item has a human-named folder containing `Listing.md` and any working photo
 | `Platforms/*/Seller Profile.md` | Seller | Create only when absent; never overwrite |
 | `Listings/**` and photos | Seller | Never overwrite or delete |
 | `Dashboard.base` | Engine | Live derived view; may be refreshed after review |
+| `.scripts/update_listing.py` | Engine | Copied from the update-listing skill; may be refreshed after review |
 
 The setup skill must identify collisions and show the exact update set before replacing engine-owned files. Updates never overwrite seller-owned content.
 ## Information layers
 Rules live in one place each. `references/operating-policy.md` owns sources of truth, fact integrity, record formats, and authority boundaries. Platform and category `Guidance.md` files own listing craft and pricing outputs. Seller profiles own voice, preferences, and approved examples only, because setup never overwrites them and any policy placed there would freeze in every installed workspace.
 
-New-listing works from one seller message containing notes and attached photos: it creates the record, saves the photos beside `Listing.md`, and only then loads the drafting material (guidance, seller profile, category guidance). When no photos are attached it creates the record and asks for them before drafting. Update-listing loads none of this; a bundled script resolves the listing, validates the transition, writes the tracked properties, and moves the folder in one call, because the operation is mechanical and model deliberation only added latency.
+New-listing works from one seller message containing notes and attached photos: it creates the record, saves the photos beside `Listing.md`, and only then loads the drafting material (guidance, seller profile, category guidance). When no photos are attached it creates the record and asks for them before drafting. Update-listing loads none of this; a bundled script resolves the listing, validates the transition, writes the tracked properties, and moves the folder in one call, because the operation is mechanical and model deliberation only added latency. Setup installs that script into the workspace so it runs where the vault lives; when the agent's plugin files and the vault are on different machines, shipping the script into a remote shell for every update was the dominant cost.
 ## Listing records
 Every template shares the same YAML properties: `type`, `platform`, `created`, `posted_price`, `posted_date`, `sold_price`, `sold_date`. The lifecycle folder supplies status, the item folder supplies the display name, and the Base derives time to sell. The body separates seller intake, platform-ready fields, and research notes. Field headings come from each template, so the templates are the field specification.
 ## Shared and divergent behavior
