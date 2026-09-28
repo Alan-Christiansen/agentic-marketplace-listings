@@ -92,20 +92,6 @@ def validate_skills() -> None:
         if f"$agentic-marketplace-listings:{name}" not in adapter:
             fail(f"Codex adapter for {name} references a stale skill id")
 
-    new_listing = read(PLUGIN / "skills" / "marketplace-new-listing" / "SKILL.md")
-    fast_path_requirements = {
-        "self-contained Stage 1": "Treat routine Stage 1 intake in an initialized workspace as self-contained.",
-        "single preflight call": "Use one read-only preflight tool call",
-        "no split preflight": "Do not split these checks into separate calls.",
-        "first-day cover routing": "including first-day covers",
-        "successful creation verification": "A successful creation tool result is sufficient verification",
-        "no post-preflight narration": "Do not add another planning or status message between a clean preflight and creation.",
-        "compact heading spacing": "do not insert a blank line immediately before or after any heading.",
-    }
-    for requirement, token in fast_path_requirements.items():
-        if token not in new_listing:
-            fail(f"New-listing skill is missing the {requirement} fast-path contract")
-
 
 def validate_workspace() -> None:
     required = [

@@ -29,7 +29,6 @@ Marketplace Listings/
 
 Each item has a human-named folder containing `Listing.md` and any working photos. The parent lifecycle folder is the authoritative status; the listing does not duplicate status in metadata.
 
-Update-listing uses a one-turn fast path when the seller identifies one listing, states the action, and supplies its required values. Its normal transitions are Building to Ready, Building or Ready to Posted, Posted to Sold, and Building, Ready, or Posted to Closed; a current-price change remains in Posted. The agent performs one compact read-only preflight, asks one grouped question only for missing required values, and does not request duplicate confirmation for a complete instruction. Corrections, terminal-state reopening, ambiguous listings, and transitions outside this matrix use an explicit review-and-approval path. Repeating an already-current update is a no-op rather than an error.
 ## Ownership boundary
 | Content | Owner | Update behavior |
 | --- | --- | --- |
@@ -42,16 +41,11 @@ Update-listing uses a one-turn fast path when the seller identifies one listing,
 
 The setup skill must identify collisions and show the exact update set before replacing engine-owned files. Updates never overwrite seller-owned content.
 ## Information layers
-New-listing uses two stages. In the first stage, the agent loads only the shared operating policy, selected template, workspace markers, and lifecycle folder names needed to create an unambiguous Building record. It then reports the exact item-folder path and pauses for photo export. An explicit statement that there will be no photos bypasses the pause.
+Rules live in one place each. `references/operating-policy.md` owns sources of truth, fact integrity, record formats, and authority boundaries. Platform and category `Guidance.md` files own listing craft and pricing outputs. Seller profiles own voice, preferences, and approved examples only, because setup never overwrites them and any policy placed there would freeze in every installed workspace.
 
-After the seller confirms the photos are ready, the agent progressively loads only the remaining information relevant to that listing:
-1. The item-specific note and co-located photos.
-2. The selected platform guide and seller profile, including that platform's approved prose examples.
-3. Category guidance when applicable, beginning with eBay stamps.
-
-Examples demonstrate voice and structure only. Their facts, prices, condition statements, and platform details must never be reused as item evidence.
+New-listing loads the template first and the drafting material (guidance, seller profile, category guidance, photos) only when it prepares the listing. Update-listing loads none of it.
 ## Listing records
-Every platform and category template retains the shared record type, platform, creation date, posted price and date, and sold price and date as YAML properties. The lifecycle folder supplies status, the item folder supplies the display name, and the Base derives time to sell. The body separates seller-supplied intake information from platform-ready fields and optional research notes. New-listing creates and saves the intake record before photo-dependent preparation begins. Facebook supports free-form notes, features, and dimensions before producing Title, Price, Category, Condition, and Description. The eBay stamp template produces Title, Price, Seller Notes, Place of Origin, Quality, Grade, Country of Origin, Certification, Category, and Item Description. Unknown values remain blank or explicitly unknown rather than being invented.
+Every template shares the same YAML properties: `type`, `platform`, `created`, `posted_price`, `posted_date`, `sold_price`, `sold_date`. The lifecycle folder supplies status, the item folder supplies the display name, and the Base derives time to sell. The body separates seller intake, platform-ready fields, and research notes. Field headings come from each template, so the templates are the field specification.
 ## Shared and divergent behavior
 Facebook Marketplace and eBay share workspace setup, lifecycle folders, common listing properties, co-located photos, the live Base dashboard, and posted/sold tracking. They diverge in platform fields, seller voice, and templates. eBay category folders contain category guidance and a complete template only when the listing form materially differs from the general eBay fallback. The stamp guide asks the seller for specialist facts but does not attempt to become a general collectibles database.
 ## Host naming
