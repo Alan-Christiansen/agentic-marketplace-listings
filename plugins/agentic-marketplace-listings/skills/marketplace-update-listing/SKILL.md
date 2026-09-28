@@ -3,22 +3,28 @@ name: marketplace-update-listing
 description: Update one existing Agentic Marketplace Listings record through Ready, Posted, price-change, Sold, or Closed lifecycle actions. Use when the seller wants to change the state or tracked posted or sold details of a known listing. Do not use for external posting, buyer communication, bookkeeping, or an ambiguous listing.
 ---
 # Marketplace: Update Listing
-Record one lifecycle change for one existing listing, in the same turn when the request is complete. Follow the plugin's [operating policy](../../references/operating-policy.md).
-## Resolve
-Confirm the workspace is initialized, resolve exactly one listing, and read only its `Listing.md`. Stop if a different item folder already occupies the target path.
-## Actions
-| Action | From | To | Requires | Writes |
-| --- | --- | --- | --- | --- |
-| Ready | Building | Ready | Nothing | Nothing |
-| Posted | Building, Ready | Posted | Posted price and date | `posted_price`, `posted_date` |
-| Price change | Posted | Posted | New price | `posted_price`; keep `posted_date` |
-| Sold | Posted | Sold | Sold price and date | `sold_price`, `sold_date` |
-| Closed | Building, Ready, Posted | Closed | Listing ended without a sale | Nothing; never sold fields |
+Record one lifecycle change with one script call. Do not read `Listing.md`, the operating policy, guidance, or the dashboard first; the script resolves the listing and checks everything.
+## Run
+```sh
+python3 "<this skill's directory>/scripts/update_listing.py" --item "<item name or path>" --action <action> [--price <number>] [--date <YYYY-MM-DD|today>] [--workspace "<workspace folder>"]
+```
 
-If required values are missing, ask one question containing only those values. "Posted" records an event the seller reports; this skill never posts to a marketplace.
-## Approval
-A request that names one listing, one action above, and its required values is the approval. Apply it without asking again.
+| Action | Moves | Needs |
+| --- | --- | --- |
+| `ready` | Building to Ready | Nothing |
+| `posted` | Building or Ready to Posted | Price and date |
+| `price` | Stays in Posted | New price |
+| `sold` | Posted to Sold | Price and date |
+| `closed` | Building, Ready, or Posted to Closed | Nothing |
 
-Pause and show the current state, the proposed change, and the exact write set before correcting recorded values, reopening a Sold or Closed listing, or making a transition not in the table. If the listing is already in the requested state with matching values, change nothing and say so.
-## Apply
-Write the properties, then move the whole item folder when the lifecycle changes. Preserve all other properties, body content, and photos. Report the resulting status, any recorded values, and the folder path. Add a next step only when one exists.
+- Pass `--workspace` unless the current folder is inside the workspace.
+- Pass `--date today` only when the seller said today. Never assume a date.
+- Recording Posted means the seller already posted it. Never post to a marketplace.
+## Act on the result
+- Exit 0 (`applied` or `already_current`): report the status, recorded values, and path in one or two lines. Stop.
+- Exit 2 (`not_found` or `ambiguous`): show the candidates, ask which one, then rerun with its path.
+- Exit 3 (`needs_approval`): show the conflict or unusual transition and ask. If the seller approves, rerun with `--approved`.
+- Exit 4 (`missing`): ask one question for the missing values, then rerun.
+- Exit 5: report the message and stop.
+## If Python is unavailable
+Make the same change by hand: set only the properties in the table's action in the `Listing.md` frontmatter (unquoted `YYYY-MM-DD` dates, numeric prices), then move the whole item folder to the target lifecycle folder.

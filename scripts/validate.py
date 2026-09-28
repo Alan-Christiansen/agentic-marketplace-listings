@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -91,6 +93,41 @@ def validate_skills() -> None:
             fail(f"Codex adapter for {name} must declare a display_name")
         if f"$agentic-marketplace-listings:{name}" not in adapter:
             fail(f"Codex adapter for {name} references a stale skill id")
+
+
+def validate_update_script() -> None:
+    script = PLUGIN / "skills" / "marketplace-update-listing" / "scripts" / "update_listing.py"
+    template = read(WORKSPACE / "Platforms" / "Facebook" / "Listing Template.md")
+    with tempfile.TemporaryDirectory() as tmp:
+        ws = Path(tmp)
+        (ws / "Dashboard.base").touch()
+        for stage in ["1 - Building", "2 - Ready", "3 - Posted", "4 - Sold", "5 - Closed"]:
+            (ws / "Listings" / stage).mkdir(parents=True)
+        item = ws / "Listings" / "1 - Building" / "Test Item"
+        item.mkdir()
+        (item / "Listing.md").write_text(template.replace("{{item name}}", "Test Item"), encoding="utf-8")
+
+        def run(*args: str) -> tuple[int, dict]:
+            done = subprocess.run([sys.executable, str(script), "--workspace", str(ws), "--item", "test item", *args],
+                                  capture_output=True, text=True)
+            return done.returncode, json.loads(done.stdout)
+
+        steps = [
+            (("--action", "posted", "--price", "50"), 4, "missing"),
+            (("--action", "posted", "--price", "$50", "--date", "2026-01-02"), 0, "applied"),
+            (("--action", "posted", "--price", "50", "--date", "2026-01-02"), 0, "already_current"),
+            (("--action", "price", "--price", "45"), 0, "applied"),
+            (("--action", "ready",), 3, "needs_approval"),
+            (("--action", "sold", "--price", "40", "--date", "2026-01-09"), 0, "applied"),
+        ]
+        for args, code, status in steps:
+            got_code, payload = run(*args)
+            if got_code != code or payload.get("status") != status:
+                fail(f"update_listing.py {' '.join(args)} returned {got_code} {payload}")
+        note = (ws / "Listings" / "4 - Sold" / "Test Item" / "Listing.md").read_text(encoding="utf-8")
+        for line in ["posted_price: 45", "posted_date: 2026-01-02", "sold_price: 40", "sold_date: 2026-01-09"]:
+            if f"\n{line}\n" not in note:
+                fail(f"update_listing.py did not record {line!r}")
 
 
 def validate_workspace() -> None:
@@ -180,6 +217,7 @@ def main() -> int:
         validate_marketplace,
         validate_skills,
         validate_workspace,
+        validate_update_script,
         validate_public_safety,
     ]
     try:
