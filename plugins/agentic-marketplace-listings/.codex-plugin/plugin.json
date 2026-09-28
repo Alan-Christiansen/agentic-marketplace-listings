@@ -12,12 +12,10 @@
   "interface": {
     "displayName": "Agentic Marketplace Listings",
     "shortDescription": "Prepare and track listings in Obsidian.",
-    "longDescription": "Create an Obsidian selling workspace with a live Base dashboard and turn rough notes and photos into organized Facebook Marketplace or eBay listing records.",
+    "longDescription": "Create an Obsidian marketplace selling workspace with a live Base dashboard and turn rough notes and photos into organized Facebook Marketplace or eBay listing records.",
     "developerName": "Spectra Studio",
     "category": "Productivity",
-    "capabilities": [
-      "Write"
-    ],
+    "capabilities": ["Write"],
     "defaultPrompt": [
       "Set up my Obsidian marketplace workspace.",
       "Start a new marketplace listing.",
